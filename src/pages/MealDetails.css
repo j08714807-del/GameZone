@@ -1,0 +1,56 @@
+/* Общий контейнер */
+.meal-container {
+    background-color: #1a1512; /* Темно-коричневый/почти черный фон */
+    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    font-family: Arial, sans-serif;
+}
+
+/* Левый блок с главной фотографией */
+.main-image-block {
+    flex: 0 0 400px; /* Фиксированная ширина левого блока */
+}
+
+.main-image {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.tags {
+    margin-top: 15px;
+    color: #cccccc;
+    font-size: 14px;
+}
+
+/* Правый блок с сеткой ингредиентов */
+.ingredients-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+    gap: 30px 20px;
+    justify-items: center;
+}
+
+/* Карточка отдельного ингредиента */
+.ingredient-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ingredient-image {
+    height: 120px; /* Фиксированная высота для выравнивания */
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.ingredient-title {
+    color: #ff8c00; /* Оранжевый цвет текста под ингредиентами */
+    font-size: 16px;
+    font-weight: 500;
+}

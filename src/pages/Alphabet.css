@@ -1,0 +1,70 @@
+/* Жалпы контейнер жана фон */
+.alphabet-page {
+    background-color: #1a1512; /* Караңгы фон */
+    min-height: 100vh;
+    padding: 30px 20px;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Башкы сөз (Заголовок) */
+.alphabet-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+/* 4 тилкелүү Grid сеткасы */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 бирдей тилке */
+    gap: 30px 20px; /* Элементтердин ортосундагы аралык */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Ар бир тамактын карточкасы */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Карточкадагы сүрөт */
+.product-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Квадраттык сүрөттөр */
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+}
+
+.product-card img:hover {
+    transform: scale(1.03); /* Чычканды алып барганда кичине чоңоюу */
+}
+
+/* Тамактын аталышы */
+.product-title {
+    color: #ff8c00; /* Оранжевый түс */
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Мобилдик түзмөктөр үчүн адаптация */
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* Экран кичирейгенде 2 тилке */
+    }
+}
+
+@media (max-width: 500px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* Телефондордо 1 тилке */
+    }
+}

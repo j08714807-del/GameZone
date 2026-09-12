@@ -1,0 +1,595 @@
+/* ══════════════════════════════════════════════════════════
+   GAMEZONE  ·  Animation System
+   ══════════════════════════════════════════════════════════ */
+
+/* ─── 1. Keyframes ─────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%       { transform: scale(1.06); opacity: .8; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 12px var(--purple-glow); }
+  50%       { box-shadow: 0 0 32px var(--purple-glow), 0 0 60px rgba(124,44,255,.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(124,44,255,.3); }
+  50%       { border-color: rgba(124,44,255,.9); }
+}
+
+@keyframes textShine {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes particleDrift {
+  0%   { transform: translateY(0)   translateX(0)   scale(1);   opacity: .6; }
+  33%  { transform: translateY(-20px) translateX(10px)  scale(1.1); opacity: .9; }
+  66%  { transform: translateY(8px)  translateX(-8px)  scale(.9);  opacity: .7; }
+  100% { transform: translateY(0)   translateX(0)   scale(1);   opacity: .6; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── 2. Page transition ────────────────────────────────── */
+
+.page-transition {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .38s ease, transform .38s ease;
+}
+
+.page-transition.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── 3. Scroll-reveal base ─────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .55s cubic-bezier(.22,1,.36,1),
+              transform .55s cubic-bezier(.22,1,.36,1);
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity .55s cubic-bezier(.22,1,.36,1),
+              transform .55s cubic-bezier(.22,1,.36,1);
+}
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity .55s cubic-bezier(.22,1,.36,1),
+              transform .55s cubic-bezier(.22,1,.36,1);
+}
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(.9);
+  transition: opacity .5s cubic-bezier(.22,1,.36,1),
+              transform .5s cubic-bezier(.22,1,.36,1);
+}
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger helpers — add delay via inline style or these classes */
+.stagger-1  { transition-delay: .05s; }
+.stagger-2  { transition-delay: .10s; }
+.stagger-3  { transition-delay: .15s; }
+.stagger-4  { transition-delay: .20s; }
+.stagger-5  { transition-delay: .25s; }
+.stagger-6  { transition-delay: .30s; }
+.stagger-7  { transition-delay: .35s; }
+.stagger-8  { transition-delay: .40s; }
+
+/* ─── 4. Hero animations ────────────────────────────────── */
+
+.hero__text {
+  animation: fadeInLeft .9s cubic-bezier(.22,1,.36,1) both;
+}
+
+.hero__tag {
+  animation: fadeInDown .6s .1s ease both;
+}
+
+.hero__title {
+  animation: fadeInUp .7s .2s cubic-bezier(.22,1,.36,1) both;
+}
+
+.hero__sub {
+  animation: fadeInUp .7s .35s cubic-bezier(.22,1,.36,1) both;
+}
+
+.hero__actions {
+  animation: fadeInUp .7s .48s cubic-bezier(.22,1,.36,1) both;
+}
+
+.hero__stats {
+  animation: fadeInUp .7s .6s cubic-bezier(.22,1,.36,1) both;
+}
+
+/* Animated gradient text for hero title-purple */
+.hero__title-purple {
+  background: linear-gradient(90deg, #a855f7, #7c2cff, #c084fc, #a855f7);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShine 4s ease infinite;
+}
+
+/* Floating particles on hero bg */
+.hero__particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--purple-light);
+  opacity: 0;
+  animation: particleDrift linear infinite;
+}
+
+/* Generate 8 particles with varied sizes/positions/durations */
+.hero__particle:nth-child(1)  { width:4px;  height:4px;  left:10%; top:20%; animation-duration:8s;  animation-delay:0s;   opacity:.5; }
+.hero__particle:nth-child(2)  { width:6px;  height:6px;  left:20%; top:60%; animation-duration:11s; animation-delay:1s;   opacity:.4; }
+.hero__particle:nth-child(3)  { width:3px;  height:3px;  left:35%; top:40%; animation-duration:9s;  animation-delay:2s;   opacity:.6; }
+.hero__particle:nth-child(4)  { width:5px;  height:5px;  left:55%; top:70%; animation-duration:13s; animation-delay:.5s;  opacity:.3; }
+.hero__particle:nth-child(5)  { width:4px;  height:4px;  left:65%; top:25%; animation-duration:10s; animation-delay:3s;   opacity:.5; }
+.hero__particle:nth-child(6)  { width:7px;  height:7px;  left:75%; top:55%; animation-duration:14s; animation-delay:1.5s; opacity:.3; }
+.hero__particle:nth-child(7)  { width:3px;  height:3px;  left:85%; top:35%; animation-duration:7s;  animation-delay:.8s;  opacity:.6; }
+.hero__particle:nth-child(8)  { width:5px;  height:5px;  left:90%; top:15%; animation-duration:12s; animation-delay:2.5s; opacity:.4; }
+
+/* ─── 5. Header ─────────────────────────────────────────── */
+
+.header {
+  animation: fadeInDown .5s ease both;
+}
+
+.header__logo {
+  transition: transform .25s ease, filter .25s ease;
+}
+.header__logo:hover {
+  transform: scale(1.04);
+  filter: drop-shadow(0 0 10px var(--purple-glow));
+}
+
+/* Nav link underline slide */
+.header__nav-link {
+  position: relative;
+  overflow: hidden;
+}
+.header__nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--purple-light);
+  border-radius: 1px;
+  transition: width .25s ease, left .25s ease;
+}
+.header__nav-link:hover::after,
+.header__nav-link.active::after {
+  width: calc(100% - 28px);
+  left: 14px;
+}
+
+/* ─── 6. Game Card ──────────────────────────────────────── */
+
+.game-card {
+  animation: fadeIn .4s ease both;
+}
+
+/* Ripple on Add-to-cart click */
+.game-card__cart-btn {
+  position: relative;
+  overflow: hidden;
+}
+.game-card__cart-btn::after {
+  content: '';
+  position: absolute;
+  inset: 50% 50%;
+  width: 0; height: 0;
+  background: rgba(255,255,255,.35);
+  border-radius: 50%;
+  transform: translate(-50%,-50%) scale(0);
+  opacity: 1;
+}
+.game-card__cart-btn:active::after {
+  animation: ripple .45s ease-out forwards;
+}
+
+/* Wishlist heart beat */
+.game-card__wishlist.active {
+  animation: pulse .4s ease;
+}
+
+/* ─── 7. Category Card ──────────────────────────────────── */
+
+.cat-card__icon {
+  transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.cat-card:hover .cat-card__icon {
+  transform: scale(1.2) rotate(-6deg);
+}
+
+/* ─── 8. Buttons ────────────────────────────────────────── */
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 50% 50%;
+  width: 0; height: 0;
+  background: rgba(255,255,255,.18);
+  border-radius: 50%;
+  transform: translate(-50%,-50%) scale(0);
+  opacity: 1;
+  pointer-events: none;
+}
+.btn:active::after {
+  animation: ripple .5s ease-out forwards;
+}
+
+.btn--primary {
+  animation: glow 3s ease infinite;
+}
+.btn--primary:hover {
+  animation: none;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 28px var(--purple-glow), 0 0 0 2px rgba(124,44,255,.3);
+}
+
+/* ─── 9. Deals banner ───────────────────────────────────── */
+
+.deals-banner__title {
+  background: linear-gradient(90deg, #ffffff, #c084fc, #7c2cff, #c084fc, #ffffff);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShine 5s ease infinite;
+}
+
+.deals-banner__item {
+  transition: transform .25s ease, background .25s ease, border-color .25s ease;
+}
+.deals-banner__item:hover {
+  transform: translateX(6px);
+}
+
+/* ─── 10. Section headers ───────────────────────────────── */
+
+.section__title {
+  position: relative;
+  display: inline-block;
+}
+.section__title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--purple);
+  border-radius: 2px;
+  transition: width .4s cubic-bezier(.22,1,.36,1);
+}
+.section:hover .section__title::after,
+.section__header:hover .section__title::after {
+  width: 100%;
+}
+
+/* ─── 11. News card ─────────────────────────────────────── */
+
+.news-card__title {
+  transition: color .25s ease;
+  position: relative;
+}
+
+/* ─── 12. Auth card ─────────────────────────────────────── */
+
+.auth-card {
+  animation: scaleIn .45s cubic-bezier(.22,1,.36,1) both;
+}
+
+.auth-social__btn {
+  position: relative;
+  overflow: hidden;
+}
+.auth-social__btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(124,44,255,.08) 100%);
+  opacity: 0;
+  transition: opacity .25s;
+}
+.auth-social__btn:hover::after { opacity: 1; }
+
+/* Input focus animation */
+.input-field {
+  transition: border-color .22s ease, box-shadow .22s ease, transform .15s ease;
+}
+.input-field:focus {
+  transform: translateY(-1px);
+}
+
+/* ─── 13. Cart & Checkout ───────────────────────────────── */
+
+.cart-item {
+  animation: fadeInLeft .35s ease both;
+}
+.cart-item:nth-child(1) { animation-delay: .0s; }
+.cart-item:nth-child(2) { animation-delay: .05s; }
+.cart-item:nth-child(3) { animation-delay: .10s; }
+.cart-item:nth-child(4) { animation-delay: .15s; }
+.cart-item:nth-child(5) { animation-delay: .20s; }
+.cart-item:nth-child(6) { animation-delay: .25s; }
+
+.cart-summary {
+  animation: slideInRight .45s cubic-bezier(.22,1,.36,1) both;
+}
+
+.success-modal {
+  animation: scaleIn .4s cubic-bezier(.22,1,.36,1) both;
+}
+
+/* ─── 14. Profile ───────────────────────────────────────── */
+
+.profile-sidebar {
+  animation: fadeInLeft .4s cubic-bezier(.22,1,.36,1) both;
+}
+.profile-content {
+  animation: fadeInRight .4s .1s cubic-bezier(.22,1,.36,1) both;
+}
+
+.profile-sidebar__nav-item {
+  position: relative;
+  overflow: hidden;
+}
+.profile-sidebar__nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--purple);
+  border-radius: 0 2px 2px 0;
+  transform: scaleY(0);
+  transition: transform .2s ease;
+}
+.profile-sidebar__nav-item--active::before {
+  transform: scaleY(1);
+}
+
+/* ─── 15. Order table rows ──────────────────────────────── */
+
+.orders-table tbody tr {
+  transition: background .2s ease;
+}
+.orders-table tbody tr:hover td {
+  background: var(--bg-card-hover);
+}
+
+/* ─── 16. Sidebar filter items ──────────────────────────── */
+
+.sidebar__item {
+  transition: background .2s ease, color .2s ease, padding-left .2s ease;
+}
+.sidebar__item:hover {
+  padding-left: 18px;
+}
+.sidebar__item--active {
+  padding-left: 18px;
+}
+
+/* ─── 17. Search dropdown ───────────────────────────────── */
+
+.header__search-dropdown {
+  animation: scaleIn .22s cubic-bezier(.22,1,.36,1) both;
+  transform-origin: top right;
+}
+
+.header__user-menu {
+  animation: scaleIn .22s cubic-bezier(.22,1,.36,1) both;
+  transform-origin: top right;
+}
+
+/* ─── 18. Screenshot modal ──────────────────────────────── */
+
+.screenshot-modal {
+  animation: fadeIn .25s ease both;
+}
+.screenshot-modal__img-wrap {
+  animation: scaleIn .3s cubic-bezier(.22,1,.36,1) both;
+}
+
+/* ─── 19. Badge pulse on cart icon ─────────────────────── */
+
+.header__badge {
+  animation: pulse 2.5s ease infinite;
+}
+
+/* ─── 20. Footer ────────────────────────────────────────── */
+
+.footer__social-link {
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), background .25s, border-color .25s, color .25s;
+}
+.footer__social-link:hover {
+  transform: translateY(-4px) scale(1.1);
+}
+
+/* ─── 21. GameDetails hero ──────────────────────────────── */
+
+.game-details__hero-content {
+  animation: fadeInUp .7s .1s cubic-bezier(.22,1,.36,1) both;
+}
+
+.game-details__sidebar {
+  animation: slideInRight .5s .2s cubic-bezier(.22,1,.36,1) both;
+}
+
+.game-details__section {
+  animation: fadeInUp .5s ease both;
+}
+.game-details__section:nth-child(1) { animation-delay: .1s; }
+.game-details__section:nth-child(2) { animation-delay: .2s; }
+.game-details__section:nth-child(3) { animation-delay: .3s; }
+
+/* Screenshot thumbnails */
+.game-details__screenshot {
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.game-details__screenshot:hover {
+  box-shadow: 0 0 20px var(--purple-glow);
+}
+
+/* ─── 22. Overlay / Modal ───────────────────────────────── */
+
+.overlay {
+  animation: fadeIn .25s ease both;
+}
+
+/* ─── 23. Skeleton shimmer override ────────────────────── */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-card) 25%,
+    var(--bg-card-hover) 50%,
+    var(--bg-card) 75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+/* ─── 24. Floating logo icon ────────────────────────────── */
+
+.header__logo-icon {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ─── 25. News page featured article ───────────────────── */
+
+.news-details__hero {
+  animation: fadeIn .6s ease both;
+}
+
+.news-details__title {
+  animation: fadeInUp .5s .1s ease both;
+}
+
+/* ─── 26. Empty state icon ──────────────────────────────── */
+
+.empty-state__icon {
+  animation: float 3s ease-in-out infinite;
+  display: block;
+}
+
+/* ─── 27. Hover glow on cards in grid ───────────────────── */
+
+.game-card:hover {
+  box-shadow:
+    0 16px 48px rgba(0,0,0,.55),
+    0 0 0 1px rgba(124,44,255,.4),
+    0 0 40px rgba(124,44,255,.18);
+}
+
+/* ─── 28.  Reduce motion for accessibility ───────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
