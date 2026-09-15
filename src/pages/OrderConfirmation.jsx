@@ -26,16 +26,16 @@ export default function OrderConfirmation() {
           <div className="order-confirm-card__icon order-confirm-card__icon--green">
             <Mail size={36} />
           </div>
-          <h2 className="order-confirm-card__title">Message Sent!</h2>
+          <h2 className="order-confirm-card__title">Сообщение отправлено!</h2>
           <p className="order-confirm-card__sub">
-            Thanks for reaching out — we'll get back to you at <strong>{orderData.email}</strong> shortly.
+            Спасибо, что написали — мы ответим на <strong>{orderData.email}</strong> в ближайшее время.
           </p>
           <div className="order-confirm-card__actions">
             <Link to="/" className="btn btn--primary btn--lg">
-              <Home size={18} /> Back to Home
+              <Home size={18} /> На главную
             </Link>
             <Link to="/games" className="btn btn--ghost btn--lg">
-              <ShoppingBag size={18} /> Keep Shopping
+              <ShoppingBag size={18} /> Продолжить покупки
             </Link>
           </div>
         </div>
@@ -52,10 +52,10 @@ export default function OrderConfirmation() {
           <CheckCircle size={48} />
         </div>
         <div className="order-confirm-banner__text">
-          <h1 className="order-confirm-banner__title">Order Successfully Placed!</h1>
+          <h1 className="order-confirm-banner__title">Заказ успешно оформлен!</h1>
           <p className="order-confirm-banner__sub">
-            Thank you, <strong>{orderData.fullName}</strong>! Your order has been received and is being processed.
-            A confirmation will be sent to <strong>{orderData.email}</strong>.
+            Спасибо, <strong>{orderData.fullName}</strong>! Ваш заказ получен и находится в обработке.
+            Подтверждение будет отправлено на <strong>{orderData.email}</strong>.
           </p>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default function OrderConfirmation() {
 
         {/* ── Order summary ── */}
         <div className="order-confirm-summary">
-          <h2 className="order-confirm-summary__title">Your Order</h2>
+          <h2 className="order-confirm-summary__title">Ваш заказ</h2>
 
           <div className="order-confirm-items">
             {orderData.items.map(item => (
@@ -72,7 +72,7 @@ export default function OrderConfirmation() {
                 <img src={item.image} alt={item.title} loading="lazy" />
                 <div className="order-confirm-item__info">
                   <span className="order-confirm-item__name">{item.title}</span>
-                  <span className="order-confirm-item__qty">Qty: {item.quantity}</span>
+                  <span className="order-confirm-item__qty">Кол-во: {item.quantity}</span>
                 </div>
                 <span className="order-confirm-item__price">
                   ${(item.price * item.quantity).toFixed(2)}
@@ -83,27 +83,27 @@ export default function OrderConfirmation() {
 
           <div className="order-confirm-summary__totals">
             <div className="order-confirm-summary__row">
-              <span>Subtotal</span>
+              <span>Подытог</span>
               <span>${orderData.subtotal.toFixed(2)}</span>
             </div>
             {orderData.discount > 0 && (
               <div className="order-confirm-summary__row">
-                <span>You Saved</span>
+                <span>Скидка</span>
                 <span style={{ color: 'var(--green)' }}>-${orderData.discount.toFixed(2)}</span>
               </div>
             )}
             <div className="order-confirm-summary__row">
-              <span>Shipping</span>
-              <span style={{ color: 'var(--green)' }}>Free</span>
+              <span>Доставка</span>
+              <span style={{ color: 'var(--green)' }}>Бесплатно</span>
             </div>
             <div className="order-confirm-summary__row order-confirm-summary__row--total">
-              <span>Total Paid</span>
+              <span>Итого оплачено</span>
               <span>${orderData.total.toFixed(2)}</span>
             </div>
           </div>
 
           <div className="order-confirm-summary__address">
-            <h3>Shipping To</h3>
+            <h3>Адрес доставки</h3>
             <p>{orderData.fullName}</p>
             <p>{orderData.address}, {orderData.city} {orderData.postalCode}</p>
             <p>{orderData.phone}</p>
@@ -111,10 +111,10 @@ export default function OrderConfirmation() {
 
           <div className="order-confirm-summary__actions">
             <Link to="/" className="btn btn--ghost">
-              <Home size={16} /> Home
+              <Home size={16} /> Главная
             </Link>
             <Link to="/games" className="btn btn--secondary">
-              <ShoppingBag size={16} /> Continue Shopping
+              <ShoppingBag size={16} /> Продолжить покупки
             </Link>
           </div>
         </div>
@@ -124,9 +124,9 @@ export default function OrderConfirmation() {
           <div className="order-confirm-contact__header">
             <MessageSquare size={22} className="order-confirm-contact__icon" />
             <div>
-              <h2 className="order-confirm-contact__title">Questions about your order?</h2>
+              <h2 className="order-confirm-contact__title">Вопросы по заказу?</h2>
               <p className="order-confirm-contact__sub">
-                Send us a message and we'll respond within 24 hours.
+                Напишите нам — ответим в течение 24 часов.
               </p>
             </div>
           </div>
@@ -141,7 +141,7 @@ export default function OrderConfirmation() {
             {/* Email — pre-filled from checkout */}
             <div className="input-wrapper">
               <label className="input-label" htmlFor="cf-email">
-                <Mail size={13} /> Email Address
+                <Mail size={13} /> Электронная почта
               </label>
               <input
                 id="cf-email"
@@ -149,7 +149,7 @@ export default function OrderConfirmation() {
                 name="email"
                 className="input-field"
                 defaultValue={orderData.email}
-                placeholder="your@email.com"
+                placeholder="ваш@email.com"
                 required
               />
               <ValidationError prefix="Email" field="email" errors={state.errors}
@@ -158,27 +158,27 @@ export default function OrderConfirmation() {
 
             {/* Subject */}
             <div className="input-wrapper">
-              <label className="input-label" htmlFor="cf-subject">Subject</label>
+              <label className="input-label" htmlFor="cf-subject">Тема</label>
               <input
                 id="cf-subject"
                 type="text"
                 name="subject"
                 className="input-field"
-                placeholder="Question about my order…"
-                defaultValue={`Order inquiry from ${orderData.fullName}`}
+                placeholder="Вопрос по моему заказу…"
+                defaultValue={`Запрос по заказу от ${orderData.fullName}`}
               />
             </div>
 
             {/* Message */}
             <div className="input-wrapper">
               <label className="input-label" htmlFor="cf-message">
-                <MessageSquare size={13} /> Message
+                <MessageSquare size={13} /> Сообщение
               </label>
               <textarea
                 id="cf-message"
                 name="message"
                 className="input-field contact-form__textarea"
-                placeholder="Hi, I have a question about my recent order…"
+                placeholder="Здравствуйте, у меня вопрос по моему недавнему заказу…"
                 required
                 rows={5}
               />
@@ -193,7 +193,7 @@ export default function OrderConfirmation() {
                 background: 'rgba(255,61,85,0.12)', border: '1px solid rgba(255,61,85,0.3)',
                 color: 'var(--red)', fontSize: 13,
               }}>
-                Something went wrong. Please try again.
+                Произошла ошибка. Попробуйте ещё раз.
               </div>
             )}
 
@@ -204,8 +204,8 @@ export default function OrderConfirmation() {
               disabled={state.submitting}
             >
               {state.submitting
-                ? 'Sending…'
-                : <><Send size={16} /> Send Message</>
+                ? 'Отправка…'
+                : <><Send size={16} /> Отправить сообщение</>
               }
             </button>
           </form>
