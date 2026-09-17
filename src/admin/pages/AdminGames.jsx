@@ -12,6 +12,7 @@ const EMPTY_FORM = {
   platform: 'PC', rating: '', image: '', description: '',
   isNew: false, isOnSale: false, developer: '', publisher: '',
   releaseDate: '', genre: '', slug: '',
+  screenshots: [],
 };
 
 function toForm(g) {
@@ -22,6 +23,7 @@ function toForm(g) {
     oldPrice: String(g.oldPrice ?? ''),
     discount: String(g.discount ?? ''),
     rating:   String(g.rating ?? ''),
+    screenshots: Array.isArray(g.screenshots) ? g.screenshots : [],
   };
 }
 
@@ -46,7 +48,7 @@ function fromForm(form, existing) {
     platform: typeof form.platform === 'string'
       ? form.platform.split(',').map(p => p.trim()).filter(Boolean)
       : form.platform,
-    screenshots: existing?.screenshots ?? [],
+    screenshots: Array.isArray(form.screenshots) ? form.screenshots.filter(Boolean) : [],
     reviews:     existing?.reviews ?? 0,
     isFeatured:  existing?.isFeatured ?? false,
   };
@@ -65,6 +67,16 @@ export default function AdminGames() {
   const [apiError,  setApiError]  = useState('');
   const [seeding,   setSeeding]   = useState(false);
   const [seedDone,  setSeedDone]  = useState(false);
+  const [screenshotInput, setScreenshotInput] = useState('');
+
+  const addScreenshot = () => {
+    const url = screenshotInput.trim();
+    if (!url) return;
+    setForm(f => ({ ...f, screenshots: [...(f.screenshots || []), url] }));
+    setScreenshotInput('');
+  };
+  const removeScreenshot = (idx) =>
+    setForm(f => ({ ...f, screenshots: f.screenshots.filter((_, i) => i !== idx) }));
 
   const cats = ['Все', ...Array.from(new Set(games.map(g => g.category).filter(Boolean)))];
 
@@ -77,7 +89,7 @@ export default function AdminGames() {
   const openAdd  = () => { setForm(EMPTY_FORM); setApiError(''); setSaveOk(false); setModal('add'); };
   const openEdit = (g) => { setSelected(g); setForm(toForm(g)); setApiError(''); setSaveOk(false); setModal('edit'); };
   const openDel  = (g) => { setSelected(g); setModal('delete'); };
-  const closeModal = () => { setModal(null); setSelected(null); setSaveOk(false); setApiError(''); };
+  const closeModal = () => { setModal(null); setSelected(null); setSaveOk(false); setApiError(''); setScreenshotInput(''); };
 
   const set = (k) => (e) =>
     setForm(f => ({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }));
@@ -368,6 +380,55 @@ export default function AdminGames() {
                   <label className="admin-form-label">Описание</label>
                   <textarea className="admin-form-textarea" placeholder="Описание игры…"
                     value={form.description} onChange={set('description')} />
+                </div>
+                <div className="admin-form-group admin-form-grid--full">
+                  <label className="admin-form-label">Скриншоттор</label>
+                  <div style={{ display:'flex', gap:8, marginBottom:8 }}>
+                    <input
+                      className="admin-form-input"
+                      placeholder="https://… (скриншоттун URL'у)"
+                      value={screenshotInput}
+                      onChange={e => setScreenshotInput(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addScreenshot())}
+                    />
+                    <button
+                      type="button"
+                      className="btn btn--secondary"
+                      onClick={addScreenshot}
+                      style={{ whiteSpace:'nowrap', flexShrink:0 }}
+                    >
+                      <Plus size={14} /> Кошуу
+                    </button>
+                  </div>
+                  {form.screenshots?.length > 0 && (
+                    <div style={{ display:'flex', flexWrap:'wrap', gap:10 }}>
+                      {form.screenshots.map((url, idx) => (
+                        <div key={idx} style={{ position:'relative', width:120 }}>
+                          <img
+                            src={url}
+                            alt={`screenshot-${idx + 1}`}
+                            style={{ width:120, height:70, objectFit:'cover', borderRadius:6, border:'1px solid var(--border)', display:'block' }}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeScreenshot(idx)}
+                            style={{
+                              position:'absolute', top:3, right:3,
+                              background:'rgba(0,0,0,0.65)', border:'none', borderRadius:'50%',
+                              width:20, height:20, display:'flex', alignItems:'center', justifyContent:'center',
+                              cursor:'pointer', color:'#fff', padding:0,
+                            }}
+                            title="Өчүрүү"
+                          >
+                            <X size={11} />
+                          </button>
+                          <span style={{ fontSize:10, color:'var(--text-muted)', display:'block', marginTop:2, textAlign:'center' }}>
+                            #{idx + 1}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div className="admin-form-group">
                   <label style={{ display:'flex', alignItems:'center', gap:8, cursor:'pointer', fontSize:13, color:'var(--text-secondary)' }}>
